@@ -30,7 +30,6 @@ Instead of updating the owner's balance for each minted NFT, ERC721A updates the
         _balances[to] = currentBalance + quantity;
     }
 ```
-In this function, `_packedAddressData[to]` is updated once for all tokens, reducing the gas cost compared to updating it for each token individually.
 
 #### 2. Data Packing
 ERC721A uses tightly packed data structures to store multiple pieces of information within single storage slots. This reduces the number of storage operations required, which are costly in terms of gas.
