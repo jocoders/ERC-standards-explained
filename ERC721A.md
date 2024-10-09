@@ -9,15 +9,26 @@ Instead of updating the owner's balance for each minted NFT, ERC721A updates the
 
 **Code Example:**
 ```solidity
-function _mintERC2309(address to, uint256 quantity) internal virtual {
-    _packedAddressData[to] += quantity * (1 << _BITPOS_NUMBER_MINTED);
-    for (uint256 i = 0; i < quantity; i++) {
-        uint256 tokenId = _currentIndex + i;
-        _packedOwnerships[tokenId] = _packOwnershipData(to, _nextExtraData(address(0), to, 0));
-        emit Transfer(address(0), to, tokenId);
+   function batchMint(address to, uint256 quantity) external onlyOwner {
+        require(quantity > 0, "Quantity must be greater than 0");
+        require(to != address(0), "Cannot mint to zero address");
+
+        // Store the current balance and tokenId for gas optimization
+        uint256 currentBalance = _balances[to];
+        uint256 currentId = _currentTokenId;
+
+        // Update total supply
+        totalSupply += quantity;
+
+        // Loop through the quantity to mint multiple tokens
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(to, currentId + i);
+        }
+
+        // Update the tokenId and balance only once
+        _currentTokenId += quantity;
+        _balances[to] = currentBalance + quantity;
     }
-    _currentIndex += quantity;
-}
 ```
 In this function, `_packedAddressData[to]` is updated once for all tokens, reducing the gas cost compared to updating it for each token individually.
 
