@@ -15,6 +15,14 @@ In Uniswap V2, `price0CumulativeLast` and `price1CumulativeLast` are part of the
 
 4. **Usage in TWAP Calculation**:
    - To calculate the Time Weighted Average Price (TWAP) over a specific period, Uniswap V2 subtracts the cumulative prices at two different points in time and divides by the time elapsed between these points. This provides a smoothed average price that reflects market conditions over the given period.
+   
+   The formula for TWAP is:
+   
+   **TWAP = (priceCumulativeLast - priceCumulativeLast) / timeElapsed**
+   where:
+   - priceCumulativeLast is the cumulative price at the end of the observation period.
+   - priceCumulativeLast is the cumulative price at the beginning of the observation period.
+   - timeElapsed is the time in seconds between the start and end of the observation period.
 
 #### Code Example:
 
