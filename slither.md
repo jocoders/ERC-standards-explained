@@ -11,7 +11,6 @@ Slither is a static analysis tool for Solidity, designed to quickly analyze smar
 - **Integration Options**: It integrates well with continuous integration (CI) systems, making it suitable for automated security checks in production workflows.
 
 ## Disadvantages of Slither
-- **Library Path Specification**: When using libraries, users must explicitly set library paths in the command line. This can be challenging initially but becomes manageable once familiar with the setup.
 - **False Positives**: Slither sometimes flags warnings that are not genuine vulnerabilities, particularly for complex constructs or newer Solidity syntax. This requires careful review to avoid unnecessary refactoring.
 - **Compatibility Limitations**: Some of the latest Solidity features might not be fully supported by Slither, as the tool’s updates occasionally lag behind Solidity’s latest releases.
 - **Output Clarity**: Slither's output can be verbose, leading to an overwhelming amount of data for larger codebases. Filtering out critical warnings may require extra effort.
